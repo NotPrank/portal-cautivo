@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirigiendo...</title>
+    <title>Redirigiendo al Sistema...</title>
     <script>
         (function () {
-            const params = new URLSearchParams(window.location.search);
-            const query = params.toString();
-            const target = 'https://siu.uni.edu.ni/portal-cautivo' + (query ? '?' + query : '');
+            // 1. Captura exactamente los parámetros que envió el FortiGate
+            const currentQuery = window.location.search; 
+            
+            // 2. Construye la URL hacia tu aplicación asegurando la barra diagonal final
+            // Si currentQuery ya trae el "?", se pega limpio; si no, va vacío.
+            const target = 'https://siu.uni.edu.ni/portal-cautivo/' + currentQuery;
+            
+            // 3. Hace el salto definitivo reemplazando el historial para evitar bucles de navegación
             window.location.replace(target);
         })();
     </script>
