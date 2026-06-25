@@ -3,102 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Cautivo - Universidad Nacional de Ingeniería</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-        }
-        .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
-        h2 {
-            color: #003366;
-            margin-bottom: 10px;
-            font-size: 22px;
-        }
-        p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-        .btn-submit {
-            background-color: #003366;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.3s ease;
-        }
-        .btn-submit:hover {
-            background-color: #002244;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="login-card">
-        <img class="logo" src="https://via.placeholder.com/150x50?text=Logo+UNI" alt="Logo UNI">
-        
-        <h2>Bienvenido al Portal Cautivo</h2>
-        <p>Presione el botón a continuación para registrar su dispositivo y tener acceso a la red de la universidad.</p>
-
-        <form id="captiveForm" action="" method="post">
-            <input type="hidden" name="username" value="alumno_uni">
-            <input type="hidden" name="password" value="clave_uni">
-
-            <button type="submit" class="btn-submit">Conectar a Internet</button>
-        </form>
-    </div>
-
+    <title>Redirigiendo...</title>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // 1. Capturar la URL actual y extraer los parámetros
-            const currentUrlParams = new URLSearchParams(window.location.search);
-            const form = document.getElementById('captiveForm');
-
-            // 2. Extraer el parámetro "post" (es la URL del FortiGate: https://10.5.47.1:10443/fgtauth)
-            const postUrl = currentUrlParams.get('post');
-            if (postUrl) {
-                form.action = postUrl;
-            } else {
-                console.error("Error: El parámetro 'post' no fue enviado por el FortiGate.");
-            }
-
-            // 3. Bucle dinámico: Recorre CUALQUIER parámetro presente en la URL actual
-            currentUrlParams.forEach((value, key) => {
-                // Creamos un input oculto para cada variable (magic, usermac, apip, etc.)
-                const hiddenInput = document.createElement('input');
-                hiddenInput.type = 'hidden';
-                hiddenInput.name = key;
-                hiddenInput.value = value;
-                
-                // Lo metemos dentro del formulario
-                form.appendChild(hiddenInput);
-            });
-            
-            console.log("Todos los parámetros han sido clonados dinámicamente al formulario.");
-        });
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const query = params.toString();
+            const target = 'https://siu.uni.edu.ni/portal-cautivo' + (query ? '?' + query : '');
+            window.location.replace(target);
+        })();
     </script>
-
-</body>
+</head>
+<body></body>
 </html>
